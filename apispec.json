@@ -13,7 +13,9 @@
   "paths": {
     "/categories" : {
       "get" : {
+        "tags" : ["Category API"],
         "description": "List all Categories",
+        "summary": "List All Categories",
         "responses": {
           "200": {
             "description": "Success Get All Categories",
@@ -31,21 +33,73 @@
                     "data" : {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "properties": {
-                          "id" : {
-                            "type": "number"
-                          },
-                          "name" : {
-                            "type": "string"
-                          }
-                        }
+                        "$ref": "#/components/schemas/Category"
                       }
                     }
                   }
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Category Api"],
+        "description": "Create New Categoty",
+        "summary": "Create New Category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code" : {
+                    "type": "number"
+                  },
+                  "status" : {
+                    "type": "string"
+                  },
+                  "data": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200" : {
+            "description": "Success Create Categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id" : {
+                      "type": "number"
+                    },
+                    "name" : {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category" : {
+        "type": "object",
+        "properties": {
+          "id" : {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
           }
         }
       }
